@@ -6,8 +6,6 @@ def scrap(url)
   return Nokogiri::HTML(URI.open(url))
 end
 
-page = scrap('https://coinmarketcap.com/all/views/all/')
-
 def fetch_currencies(noko_page)
   currencies = []
   noko_page.xpath("//tbody//a[@class='cmc-table__column-name--symbol cmc-link']").each do |currency| 
@@ -25,7 +23,8 @@ def fetch_prices(noko_page)
 end
 
 
-def dark_trader(page)
+def dark_trader(page = scrap('https://coinmarketcap.com/all/views/all/'))
+  page = scrap('https://coinmarketcap.com/all/views/all/')
   currencies = fetch_currencies(page)
   prices = fetch_prices(page)
   currency_price_list = []
@@ -33,9 +32,7 @@ def dark_trader(page)
   return currency_price_list
 end
 
-puts page.class
-
-#puts dark_trader(page)
+puts dark_trader()
 
 # Pour LTC
 # //*[@id="__next"]/div[1]/div[2]/div/div[1]/div/div[2]/div[3]/div/table/tbody/tr[21]/td[3]/div
