@@ -8,7 +8,7 @@ end
 def get_deputy_email(deputy_url,xpath_email,xpath_email_alt)
   page = scrap(deputy_url)
   page.xpath(xpath_email).text.size == 0 ? deputy_email = page.xpath(xpath_email_alt).text : deputy_email = page.xpath(xpath_email).text
-  deputy_email.size == 0 ? deputy_email = "No mail address" : deputy_email
+  deputy_email.size == 0 ? deputy_email = "No m@il address" : deputy_email
   puts "Working on #{deputy_email}"
   return deputy_email
 end
