@@ -28,14 +28,14 @@ describe "fetch_currency should contain at least BTC and ETH" do
   end
 end
 
-describe "fetch_currency should have at least 5 currencies" do
+describe "fetch_currencies should have at least 5 currencies" do
   it "the size of the output list should be bigger than 5" do
   page = scrap('https://coinmarketcap.com/all/views/all/')
   expect(fetch_currencies(page).size >= 5).to  eq(true)
   end
 end
 
-describe "fetch_currency shouldn't containe nil values" do
+describe "fetch_currencies shouldn't containe nil values" do
   it "check whether or not there a nil element in the list" do
   page = scrap('https://coinmarketcap.com/all/views/all/')
  
