@@ -53,32 +53,15 @@ def deputy_stalker (all_deputies_url)
   puts "Fetched all emails"
   
   puts "Merging all data"
-  liste_deputies_names.each.with_index {|deputy,i| liste_deputy_stalker << {deputy => liste_deputies_emails[i]}}
+  liste_deputies_names.each.with_index {|deputy_name,i| liste_deputy_stalker << three_fork_hash(deputy_name,liste_deputies_emails[i])}
   return liste_deputy_stalker
 end
 
+def three_fork_hash (deputy_name,email)
+  deputy_name_list = deputy_name.split(" ")
+  return {"first_name" => deputy_name_list[1] }.merge({"last_name" => deputy_name_list[2] }.merge({"email" => email}))
+end
+
+#puts three_fork_hash("M Jean Lassalle", "aaa@b")
+
 puts deputy_stalker('https://www2.assemblee-nationale.fr/deputes/liste/alphabetique')
-
-
-
-
-
-
-
-
-all_deputies_url = 'https://www2.assemblee-nationale.fr/deputes/liste/alphabetique'
-#xpath_email = '/html/body/div/div[2]/div/div/div/section[1]/div/article/div[3]/div/dl/dd[4]/ul/li[2]/a'
-xpath_email = '/html/body/div/div[2]/div/div/div/section[1]/div/article/div[3]/div/dl/dd[3]/ul/li[2]/a'
-xpath_deputies_url = "///div[@id='deputes-list']//a/@href"
-xpath_deputies_name = "//div[@id='deputes-list']//a"
-#puts get_deputy_email(get_deputy_urls(all_deputies_url,xpath_deputies_url)[14],xpath_email)
-#puts get_deputy_urls(all_deputies_url,xpath_deputies_url)
-#puts get_deputy_names(all_deputies_url,xpath_deputies_name)
-
-### WORKS
-#/html/body/div/div[2]/div/div/div/section[1]/div/article/div[3]/div/dl/dd[4]/ul/li[2]/a
-#/html/body/div/div[2]/div/div/div/section[1]/div/article/div[3]/div/dl/dd[4]/ul/li[2]/a
-
-## DOES NOT WORK
-#/html/body/div/div[2]/div/div/div/section[1]/div/article/div[3]/div/dl/dd[3]/ul/li[2]/a
-#/html/body/div/div[2]/div/div/div/section[1]/div/article/div[3]/div/dl/dd[3]/ul/li[2]/a
