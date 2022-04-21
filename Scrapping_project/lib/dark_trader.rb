@@ -17,7 +17,7 @@ end
 def fetch_prices(noko_page)
   prices = []
   noko_page.xpath("//tbody//td[@class='cmc-table__cell cmc-table__cell--sortable cmc-table__cell--right cmc-table__cell--sort-by__price']//a[@class='cmc-link']").each do |price| 
-    prices << price.text[1..-1].to_f
+    prices << price.text.delete(",$").to_f
   end
   return prices
 end

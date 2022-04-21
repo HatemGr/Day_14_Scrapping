@@ -8,7 +8,7 @@ describe "dark_trader returns at least 5 elements" do
 end
 
 describe "dark_trader containes at least BTC and ETH" do
-  it "the size of the output list should be bigger than 5" do
+  it "The test checking the presence of BTC and ETH should return true" do
   page = scrap('https://coinmarketcap.com/all/views/all/')
   has_BTC = false
   has_ETH = false
@@ -20,7 +20,7 @@ describe "dark_trader containes at least BTC and ETH" do
 end
 
 describe "fetch_currency should contain at least BTC and ETH" do
-  it "the size of the output list should be bigger than 5" do
+  it "The test checking the presence of BTC and ETH should return true" do
   page = scrap('https://coinmarketcap.com/all/views/all/')
  
   expect(fetch_currencies(page).include?("BTC")).to  eq(true)
