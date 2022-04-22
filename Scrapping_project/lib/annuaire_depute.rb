@@ -62,6 +62,5 @@ def three_fork_hash (deputy_name,email)
   return {"first_name" => deputy_name_list[1] }.merge({"last_name" => deputy_name_list[2] }.merge({"email" => email}))
 end
 
-#puts three_fork_hash("M Jean Lassalle", "aaa@b")
 
 puts deputy_stalker('https://www2.assemblee-nationale.fr/deputes/liste/alphabetique')
