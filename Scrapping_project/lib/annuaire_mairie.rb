@@ -1,10 +1,12 @@
 require 'open-uri'
 require 'nokogiri'
 
+### --- Methode pour scraper une page à partir de son URL
 def scrap(url)
   return Nokogiri::HTML(URI.open(url))
 end
 
+### --- Methode pour recuperer l'adress mail dans une page de mairie
 def get_townhall_email(townhall_url,xpath_email)
   page = scrap(townhall_url)
   townhall_email = page.xpath(xpath_email).text
@@ -13,6 +15,7 @@ def get_townhall_email(townhall_url,xpath_email)
   return townhall_email
 end
 
+### --- Methode pour recuperer les urls des mairie dans l'annuaire du departement
 def get_townhall_urls(departement_url,xpath_cities_url)
   page = scrap(departement_url)
   liste_cities_url = []
@@ -22,6 +25,7 @@ def get_townhall_urls(departement_url,xpath_cities_url)
   return liste_cities_url
 end
 
+### --- Methode pour recuperer les nomes de villes dans l'annuaire du departement
 def get_townhall_names(departement_url,xpath_cities_name)
   page = scrap(departement_url)
   liste_city_names = []
@@ -31,12 +35,13 @@ def get_townhall_names(departement_url,xpath_cities_name)
   return liste_city_names
 end
 
-
+### --- Methode pour generer une bar de chargement
 def loading_bar(total_size, current_size)
   current_size = 100 * current_size / total_size
   puts ("#" * current_size.to_i).ljust(100,"-")
 end
 
+### --- Methode appelant les autres sous methodes
 def mayor_stalker (departement_url)
   xpath_email = '/html/body/div/main/section[2]/div/table/tbody/tr[4]/td[2]'
   xpath_cities_url = "//a[@class='lientxt']/@href"
@@ -63,4 +68,5 @@ def mayor_stalker (departement_url)
   return liste_mayor_stalker
 end
 
+### --- Appel de la methode mayor_stalker
 puts mayor_stalker('https://www.annuaire-des-mairies.com/val-d-oise.html')
